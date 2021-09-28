@@ -14,12 +14,12 @@ import Domain.Entities._
 import Domain.Intents.Intent
 import Domain.Replies._
 import Scripts.PersistScript
-import Scripts.TakeMortrage
+import Scripts.TakeMortgage
 
 object Routes {
 
   class Routes(
-    buildTakeMortrageScript: ActorRef[TakeMortrage.Command],
+    buildTakeMortgageScript: ActorRef[TakeMortgage.Command],
     buildPersistScript: ActorRef[PersistScript.Command]
   )(implicit system: ActorSystem[_])
       extends JsonFormats {
@@ -37,8 +37,8 @@ object Routes {
               val intent = Intent(whatToReplyRequest.recognizedText)
               system.log.info("intent: {}", intent)
               val operationPerformed: Future[Reply] =
-                buildTakeMortrageScript.ask(
-                  TakeMortrage.WhatToReply(intent = intent, _)
+                buildTakeMortgageScript.ask(
+                  TakeMortgage.WhatToReply(intent = intent, _)
                 )
               onSuccess(operationPerformed) { response =>
                 response match {

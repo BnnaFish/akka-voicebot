@@ -7,7 +7,7 @@ import Domain.Entities._
 import Domain.Replies._
 import Domain.Intents._
 
-object TakeMortrage {
+object TakeMortgage {
   sealed trait Command
 
   final case class WhatToReply(intent: Intent, replyTo: ActorRef[Reply]) extends Command
