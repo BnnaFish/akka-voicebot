@@ -19,7 +19,12 @@ lazy val domain = appModule(moduleID = "domain")
   )
 
 lazy val scripts = appModule(moduleID = "scripts")
-  .settings(libraryDependencies ++= Seq(akkaPersistence))
+  .settings(libraryDependencies ++= Seq(
+    akkaPersistence,
+    akkaActorTestkit,
+    scalaTest,
+    akkaPersistenceTestkit)
+  )
   .dependsOn(domain)
 
 lazy val voicebot = appModule(moduleID = "voicebot")

@@ -20,4 +20,8 @@ object Dependencies {
   val persistencePostgres = "com.swissborg" %% "akka-persistence-postgres" % "0.5.0-M1"
   val akkaPersistence = "com.typesafe.akka" %% "akka-persistence-typed" % akkaVersion
   val jackson = "com.typesafe.akka" %% "akka-serialization-jackson" % akkaVersion
+
+  val scalaTest = "org.scalatest" %% "scalatest" % "3.2.9" % Test
+  val akkaActorTestkit = "com.typesafe.akka" %% "akka-actor-testkit-typed" % akkaVersion % Test
+  val akkaPersistenceTestkit = "com.typesafe.akka" %% "akka-persistence-testkit" % akkaVersion % Test
 }
