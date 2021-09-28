@@ -22,7 +22,7 @@ object PersistScript {
   }
 
   case object InitState extends State {
-    override def whatToReply: Reply = WantToTakeMortrageReply()
+    override def whatToReply: Reply = WantToTakeMortgageReply()
   }
 
   case object InternalError extends State {
@@ -30,7 +30,7 @@ object PersistScript {
   }
 
   case object AskedQuestion extends State {
-    override def whatToReply: Reply = WantToTakeMortrageReply()
+    override def whatToReply: Reply = WantToTakeMortgageReply()
   }
 
   case object NoAnswerResived extends State {
@@ -38,7 +38,7 @@ object PersistScript {
   }
 
   case object YesAnswerResived extends State {
-    override def whatToReply: Reply = InitialSumQuotationReply()
+    override def whatToReply: Reply = InitialSumQuestionReply()
   }
 
   // case object AskedInitialSumQuestion extends State {
@@ -46,7 +46,7 @@ object PersistScript {
   // }
 
   final case class AskedTotalSumQuestion(initialSum: Long) extends State {
-    override def whatToReply: Reply = TotalSumQuotationReply()
+    override def whatToReply: Reply = TotalSumQuestionReply()
   }
 
   final case class TotalSumAnswered(initialSum: Long, totalSum: Long) extends State {
@@ -54,10 +54,10 @@ object PersistScript {
     def isEnoughInitialSum: Boolean = part > 0.15
 
     override def whatToReply: Reply =
-      if (isEnoughInitialSum) OkToTakeMortrageReply() else ToSmallInitialSumReply(part = part)
+      if (isEnoughInitialSum) OkToTakeMortgageReply() else ToSmallInitialSumReply(part = part)
   }
 
-  case object MortrageCongrats extends State {
+  case object MortgageCongrats extends State {
     override def whatToReply: Reply = GoodbuyReply()
   }
 
@@ -136,9 +136,9 @@ object PersistScript {
         }
       case TotalSumAnswered(initialSum, totalSum) =>
         event match {
-          case _ => MortrageCongrats
+          case _ => MortgageCongrats
         }
-      case InternalError | MortrageCongrats | NoAnswerResived => InitState
+      case InternalError | MortgageCongrats | NoAnswerResived => InitState
     }
   }
 

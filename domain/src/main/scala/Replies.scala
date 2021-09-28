@@ -8,31 +8,31 @@ object Replies {
   sealed trait Reply extends JsonSerializable {
     val textToReply: TextToReply
   }
-  final case class GreetReply(textToReply: TextToReply = "Я бот. Какой у вас вопрос?") extends Reply
+  final case class GreetReply(textToReply: TextToReply = "What question do you have?") extends Reply
 
-  final case class WantToTakeMortrageReply(textToReply: TextToReply = "Вы хотите взять ипотеку?")
+  final case class WantToTakeMortgageReply(textToReply: TextToReply = "Do you what to buy a house?")
       extends Reply
 
-  final case class GoodbuyReply(textToReply: TextToReply = "Есть ли еще вопросы?") extends Reply
+  final case class GoodbuyReply(textToReply: TextToReply = "Any other questions?") extends Reply
 
-  final case class InitialSumQuotationReply(
-    textToReply: TextToReply = "Какой у вас первоначальный взнос?"
+  final case class InitialSumQuestionReply(
+    textToReply: TextToReply = "What amount of initial sum do you allready have?"
   ) extends Reply
 
-  final case class TotalSumQuotationReply(
-    textToReply: TextToReply = "На какую сумму ипотека?"
+  final case class TotalSumQuestionReply(
+    textToReply: TextToReply = "What amount of mortgage do you need?"
   ) extends Reply
 
   final case class ToSmallInitialSumReply(
-    textToReply: TextToReply = "Слишком маленький первоначальный взнос",
+    textToReply: TextToReply = "Sorry, but not enough initial sum.",
     part: Float
   ) extends Reply
 
-  final case class OkToTakeMortrageReply(
-    textToReply: TextToReply = "Вам одобрена ипотека"
+  final case class OkToTakeMortgageReply(
+    textToReply: TextToReply = "Mortgage is approved. Congratulations!"
   ) extends Reply
 
   final case class SomethingGoesWrongReply(
-    textToReply: TextToReply = "Произошла ошибка. Оператор вам перезвонит"
+    textToReply: TextToReply = "Something goes wrone. Оperator will call you back soon."
   ) extends Reply
 }
