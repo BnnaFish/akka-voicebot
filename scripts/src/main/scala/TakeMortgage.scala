@@ -7,7 +7,7 @@ import Domain.Entities._
 import Domain.Replies._
 import Domain.Intents._
 
-object TakeMortrage {
+object TakeMortgage {
   sealed trait Command
 
   final case class WhatToReply(intent: Intent, replyTo: ActorRef[Reply]) extends Command
@@ -16,7 +16,7 @@ object TakeMortrage {
 
   private def greet(): Behavior[Command] = Behaviors.receiveMessage[Command] {
     case WhatToReply(_, replyTo) => {
-      replyTo ! WantToTakeMortrageReply()
+      replyTo ! WantToTakeMortgageReply()
       askedQuotation()
     }
     case _ => Behaviors.same
@@ -28,7 +28,7 @@ object TakeMortrage {
         case ba: BoolAnswer[_] =>
           ba match {
             case Yes(_) => {
-              replyTo ! InitialSumQuotationReply()
+              replyTo ! InitialSumQuestionReply()
               waitInitialSumAnswer()
             }
             case No(_) => {
@@ -45,7 +45,7 @@ object TakeMortrage {
 
   private def waitInitialSumAnswer(): Behavior[Command] = Behaviors.receiveMessage[Command] {
     case WhatToReply(Number(_, initialSum), replyTo) => {
-      replyTo ! TotalSumQuotationReply()
+      replyTo ! TotalSumQuestionReply()
       waitTotalSumAnswer(initialSum = initialSum)
     }
     case WhatToReply(_, replyTo) => {
@@ -60,7 +60,7 @@ object TakeMortrage {
         if (initialSum.toFloat / totalSum.toFloat < 0.15) {
           replyTo ! ToSmallInitialSumReply(part = initialSum.toFloat / totalSum.toFloat)
         } else {
-          replyTo ! OkToTakeMortrageReply()
+          replyTo ! OkToTakeMortgageReply()
         }
         greet()
       }

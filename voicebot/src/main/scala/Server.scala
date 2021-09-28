@@ -10,7 +10,7 @@ import scala.concurrent.Future
 import scala.util.{Failure, Success}
 
 import Routes.Routes
-import Scripts.{PersistScript, TakeMortrage}
+import Scripts.{PersistScript, TakeMortgage}
 
 object Server {
   sealed trait Message
@@ -21,10 +21,10 @@ object Server {
   def apply(host: String, port: Int): Behavior[Message] = Behaviors.setup { ctx =>
     implicit val system = ctx.system
 
-    val buildTakeMortrageScript = ctx.spawn(TakeMortrage(), "TakeMortrage")
+    val buildTakeMortgageScript = ctx.spawn(TakeMortgage(), "TakeMortgage")
     val buildPersistScript =
       ctx.spawn(PersistScript("entityId", PersistenceId.ofUniqueId("abc")), "PersistScript")
-    val routes = new Routes(buildTakeMortrageScript, buildPersistScript)
+    val routes = new Routes(buildTakeMortgageScript, buildPersistScript)
 
     val serverBinding: Future[Http.ServerBinding] =
       Http().newServerAt(host, port).bind(routes.routes)
