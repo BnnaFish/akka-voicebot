@@ -51,7 +51,8 @@ object PersistScript {
 
   final case class TotalSumAnswered(initialSum: Long, totalSum: Long) extends State {
     val part = initialSum.toFloat / totalSum.toFloat
-    def isEnoughInitialSum: Boolean = part > 0.15
+    def threshold = 0.15
+    def isEnoughInitialSum: Boolean = part > threshold
 
     override def whatToReply: Reply =
       if (isEnoughInitialSum) OkToTakeMortgageReply() else ToSmallInitialSumReply(part = part)
