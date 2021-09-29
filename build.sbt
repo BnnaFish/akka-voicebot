@@ -23,7 +23,9 @@ lazy val scripts = appModule(moduleID = "scripts")
     akkaPersistence,
     akkaActorTestkit,
     scalaTest,
-    akkaPersistenceTestkit)
+    akkaPersistenceTestkit,
+    jackson
+  )
   )
   .dependsOn(domain)
 
