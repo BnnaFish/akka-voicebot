@@ -72,12 +72,12 @@ object PersistScript {
 
   sealed trait Event extends JsonSerializable
   case class UserSaidEvent(intent: Intent) extends Event
-  case object UserSaidEventDone
+  case object UserSaidEventDone extends Event
   case class Replied(reply: Reply) extends Event
   case class InitialSumResived(initialSum: Long) extends Event
-  case object InitialSumSaved
+  case object InitialSumSaved extends Event
   case class TotalSumResived(totalSum: Long) extends Event
-  case object TotalSumSaved
+  case object TotalSumSaved extends Event
 
   def apply(entityId: String, persistenceId: PersistenceId): Behavior[Command] = {
     Behaviors.setup { context =>
