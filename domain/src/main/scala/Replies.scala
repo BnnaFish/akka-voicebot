@@ -33,6 +33,6 @@ object Replies {
   ) extends Reply
 
   final case class SomethingGoesWrongReply(
-    textToReply: TextToReply = "Something goes wrone. Оperator will call you back soon."
+    textToReply: TextToReply = "Something goes wrong. Оperator will call you back soon."
   ) extends Reply
 }
